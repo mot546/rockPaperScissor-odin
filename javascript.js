@@ -72,17 +72,15 @@ function playGame(){
 
         if (humanScore !== 3 && compScore !== 3 && match !== 5){
             message = playRound(humanChoice, compChoice);
-            alert(`${message}, Your Score: ${humanScore} | Computer: ${compScore}`);
             message !== "Draw"? match +=1: message="Draw";
+            alert(`${message}|| Your Score: ${humanScore} | Computer: ${compScore}`);
+            
         }
         else{
             match += 5;
         }
     }
-
     humanScore > compScore? alert("YOU WIN THE MATCH!, YOU SCORED 3 POINTS FIRST!")
     : alert("you lose maaaan!, computer won 3 points faster than yow");
-
-
 }
 playGame();
