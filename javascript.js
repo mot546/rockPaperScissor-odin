@@ -1,10 +1,12 @@
 // the value of rock is 0, paper is 1, scissor is 2 
+// 0 beat 2
+// 1 beat 0
+// 2 beat 1
 
-let humanScore = 0, compScore = 0;
+let humanScore = 0, compScore = 0, match = 0;
 
-function getComputerChoice(){// get the following number: 0 = rock, 1= paper, 2= scissor,,,,,
-    const randomNum = Math.floor(Math.random() * 3);        //this function return 2 values
-
+function getComputerChoice(){
+    const randomNum = Math.floor(Math.random() * 3);   
     if (randomNum === 0){
         return ["rock", 0];
     }
@@ -36,14 +38,29 @@ function getHumanChoice(){
 
         getHumanChoice();
     }
-} // this return array
+} 
 
 function playRound(human, comp){
+    const humanValue = human[1];
+    const compValue = comp[1];
+    let message = "";
 
+    if (humanValue === 0){//rock
+        compValue === 1? message = "You Lose"
+        :(compValue === 2? message = "You Win": message = "Draw");
+    }
+    else if ( humanValue === 1){//paper
+        compValue === 0? message="You Win"
+        :(compValue === 2? message = "You Lose": message = "Draw");
+    }
+    else{//Scissor
+        compValue === 0?message = "You Lose"
+        :(compValue === 1? message="You Win": message = "Draw");
+    }
+    return message;
 }
 
-let comp = getComputerChoice();
-let human = getHumanChoice();
-
-console.log(comp);
-console.log(human);
+function playGame(){
+    
+    
+}
