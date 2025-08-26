@@ -3,7 +3,7 @@
 // 1 beat 0
 // 2 beat 1
 
-let humanScore = 0, compScore = 0, match = 0;
+let humanScore = 0, compScore = 0;
 
 function getComputerChoice(){
     const randomNum = Math.floor(Math.random() * 3);   
@@ -26,17 +26,16 @@ function getHumanChoice(){
     if (userInput === "ROCK" || userInput === "ROCKS"){
         return ["rock",0];
     }
-    else if (userInput === "PAPER" || userInputs === "PAPERS"){
+    else if (userInput === "PAPER" || userInput === "PAPERS"){
         return ["paper", 1];
     }
     else if (userInput === "SCISSOR" || userInput === "SCISSORS"){
         return ["scissor", 2];
     }
-    else {
+    else{
         alert("Input INVALID, PLEASE CHECK YOUR SPELLING!");
         alert("Try again ok");
-
-        getHumanChoice();
+        playGame();
     }
 } 
 
@@ -55,12 +54,35 @@ function playRound(human, comp){
     }
     else{//Scissor
         compValue === 0?message = "You Lose"
-        :(compValue === 1? message="You Win": message = "Draw");
+        :(compValue === 1? message= "You Win": message = "Draw");
     }
+
+    message === "You Win"? humanScore += 1:(message === "You Lose"? compScore += 1: message = "Draw");
     return message;
 }
 
 function playGame(){
-    
-    
+    let humanChoice, compChoice;
+    let match = 0;
+    let message = "";
+
+    while(match < 5){
+        humanChoice = getHumanChoice();
+        compChoice = getComputerChoice();
+
+        if (humanScore !== 3 && compScore !== 3 && match !== 5){
+            message = playRound(humanChoice, compChoice);
+            alert(`${message}, Your Score: ${humanScore} | Computer: ${compScore}`);
+            message !== "Draw"? match +=1: message="Draw";
+        }
+        else{
+            match += 5;
+        }
+    }
+
+    humanScore > compScore? alert("YOU WIN THE MATCH!, YOU SCORED 3 POINTS FIRST!")
+    : alert("you lose maaaan!, computer won 3 points faster than yow");
+
+
 }
+playGame();
