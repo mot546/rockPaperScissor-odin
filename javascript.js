@@ -73,7 +73,7 @@ function playGame(){
         if (humanScore !== 3 && compScore !== 3 && match !== 5){
             message = playRound(humanChoice, compChoice);
             message !== "Draw"? match +=1: message="Draw";
-            alert(`${message}|| Your Score: ${humanScore} | Computer: ${compScore}`);
+            alert(`${message} || Your Score: ${humanScore} | Computer: ${compScore}`);
             
         }
         else{
