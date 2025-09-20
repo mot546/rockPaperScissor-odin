@@ -3,6 +3,7 @@
 // 1 beat 0
 // 2 beat 1
 
+const buttonsNode= document.querySelector(".buttonSelect").querySelectorAll("button");
 let humanScore = 0, compScore = 0;
 
 function getComputerChoice(){
@@ -18,26 +19,6 @@ function getComputerChoice(){
     }
     
 }// this returns array
-
-function getHumanChoice(){
-    let userInput = prompt("Enter Rock, Paper, Scissor", "paper");
-    userInput = userInput.toUpperCase();
-
-    if (userInput === "ROCK" || userInput === "ROCKS"){
-        return ["rock",0];
-    }
-    else if (userInput === "PAPER" || userInput === "PAPERS"){
-        return ["paper", 1];
-    }
-    else if (userInput === "SCISSOR" || userInput === "SCISSORS"){
-        return ["scissor", 2];
-    }
-    else{
-        alert("Input INVALID, PLEASE CHECK YOUR SPELLING!");
-        alert("Try again ok");
-        playGame();
-    }
-} 
 
 function playRound(human, comp){
     const humanValue = human[1];
@@ -62,25 +43,28 @@ function playRound(human, comp){
 }
 
 function playGame(){
-    let humanChoice, compChoice;
-    let match = 0;
     let message = "";
 
-    while(match < 5){
-        humanChoice = getHumanChoice();
-        compChoice = getComputerChoice();
-
-        if (humanScore !== 3 && compScore !== 3 && match !== 5){
-            message = playRound(humanChoice, compChoice);
-            message !== "Draw"? match +=1: message="Draw";
-            alert(`${message} || Your Score: ${humanScore} | Computer: ${compScore}`);
+            buttonsNode.forEach(element => {
+            let playerChoice = [];
+            if (element.className === "rock") playerChoice = ["ROCK", 0];
+            if (element.className === "paper") playerChoice = ["PAPER", 1];
+            if (element.className === "scissor") playerChoice = ["SCISSOR", 2];
             
-        }
-        else{
-            match += 5;
-        }
+            element.addEventListener("click",function() {
+                let compChoice = getComputerChoice();
+                message = playRound(playerChoice, compChoice);
+                alert(`${message} || Your Score: ${humanScore} | Computer: ${compScore}`);
+            });
+        });
+
+        
+    if(humanScore === 5 || compScore === 5){
+        humanScore > compScore? alert("YOU WIN THE MATCH!, YOU SCORED 3 POINTS FIRST!")
+        : alert("you lose maaaan!, computer won 3 points faster than yow");
     }
-    humanScore > compScore? alert("YOU WIN THE MATCH!, YOU SCORED 3 POINTS FIRST!")
-    : alert("you lose maaaan!, computer won 3 points faster than yow");
 }
+
+
 playGame();
+
